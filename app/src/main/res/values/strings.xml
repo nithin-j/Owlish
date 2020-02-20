@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Owlish</string>
+
+    <string name="title">Owlish</string>
+    <string name="hint_name">name</string>
+    <string name="hint_user">username</string>
+    <string name="hint_password">password</string>
+    <string name="hint_confirm_password">confirm password</string>
+    <string name="button_login">Login</string>
+    <string name="button_register">Register</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="register_label">First time using Owlish?</string>
+    <string name="login_label">Already have an Owlish account?</string>
+
 </resources>
