@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "154660383919",
+    "firebase_url": "https://pjowlish.firebaseio.com",
+    "project_id": "pjowlish",
+    "storage_bucket": "pjowlish.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:154660383919:android:0afdae946c8979b890385a",
+        "android_client_info": {
+          "package_name": "com.example.owlish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "154660383919-12crdju5vreo81ovevnnp660p3ol4k0q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.owlish",
+            "certificate_hash": "434c110da8f119ee24599aacfb0f83f608cf442d"
+          }
+        },
+        {
+          "client_id": "154660383919-271prd25u23og6cfpscl6tcuo7h20in6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLZh4jzXvrsYgQOAQ0UFIsCqWI0K6cKac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "154660383919-271prd25u23og6cfpscl6tcuo7h20in6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
