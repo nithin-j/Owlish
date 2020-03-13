@@ -1,5 +1,13 @@
 package com.example.owlish;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,9 +16,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import android.net.Uri;
-import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -34,6 +39,13 @@ public class NewEntryActivity extends AppCompatActivity implements IncomeFragmen
 
         toolbar = findViewById(R.id.new_entry_toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(NewEntryActivity.this, MainActivity.class));
+            }
+        });
+
 
         viewPager = findViewById(R.id.new_entry_view_pager);
         tabLayout = findViewById(R.id.new_entry_tab_layout);
@@ -53,6 +65,38 @@ public class NewEntryActivity extends AppCompatActivity implements IncomeFragmen
         tabLayout.getTabAt(0).setIcon(R.drawable.tab_income);
         tabLayout.getTabAt(1).setIcon(R.drawable.tab_expense);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.menuAccount:
+
+
+            case R.id.menuCategory:
+
+
+            case R.id.menuReports:
+
+
+            case R.id.menuHelp:
+
+
+            case R.id.menuLogout:
+                Toast.makeText(this, "Coming soon enough", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+        }
 
     @Override
     public void onFragmentInteraction(Uri uri) {
