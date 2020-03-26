@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
-    TextInputEditText etUSername, etPassword;
+    TextInputEditText etUsername, etPassword;
     MaterialButton btnLogin, btnLoadRegister;
     private FirebaseAuth mAuth;
 
@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initialize() {
 
-        etUSername = findViewById(R.id.etName);
+        etUsername = findViewById(R.id.etName);
         etPassword = findViewById(R.id.etPassword);
 
         btnLogin = findViewById(R.id.button_login);
@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login() {
         String email, password;
-        email = etUSername.getText().toString();
+        email = etUsername.getText().toString();
         password = etPassword.getText().toString();
 
         validate(email,password);

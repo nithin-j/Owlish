@@ -48,10 +48,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         
         switch (item.getItemId()){
             case R.id.menuAccount:
-
+                Toast.makeText(this, "Coming soon enough", Toast.LENGTH_SHORT).show();
+                break;
 
             case R.id.menuCategory:
-
+                startActivity(new Intent(MainActivity.this, CategoryActivity.class));
+                break;
 
             case R.id.menuReports:
 

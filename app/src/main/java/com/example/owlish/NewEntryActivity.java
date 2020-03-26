@@ -1,76 +1,62 @@
 package com.example.owlish;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
-import java.util.ArrayList;
-import java.util.List;
+public class NewEntryActivity extends AppCompatActivity {
 
-public class NewEntryActivity extends AppCompatActivity implements IncomeFragment.OnFragmentInteractionListener, ExpenseFragment.OnFragmentInteractionListener {
-
-    private Toolbar toolbar;
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
-
-    private ExpenseFragment expenseFragment;
-    private IncomeFragment incomeFragment;
-
-
+    Toolbar mtoolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_entry);
+        initialize();
+    }
 
-        toolbar = findViewById(R.id.new_entry_toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+    private void initialize() {
+        mtoolbar = findViewById(R.id.main_toolbar);
+        setSupportActionBar(mtoolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        ViewPager2 viewPager2 = findViewById(R.id.viewPager);
+        viewPager2.setAdapter(new NewEntryPagerAdapter(this));
+
+        TabLayout tabLayout = findViewById(R.id.tabLatout);
+        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(NewEntryActivity.this, MainActivity.class));
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                switch (position){
+                    case 0:
+                        tab.setText("Income");
+                        tab.setIcon(R.drawable.tab_income);
+                        break;
+                    case 1:
+                        tab.setText("Expense");
+                        tab.setIcon(R.drawable.tab_expense);
+                        break;
+                }
             }
         });
-
-
-        viewPager = findViewById(R.id.new_entry_view_pager);
-        tabLayout = findViewById(R.id.new_entry_tab_layout);
-
-        expenseFragment = new ExpenseFragment();
-        incomeFragment = new IncomeFragment();
-
-        tabLayout.setupWithViewPager(viewPager);
-
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
-
-        viewPagerAdapter.addFragment(incomeFragment,"Income");
-        viewPagerAdapter.addFragment(expenseFragment, "Expense");
-
-        viewPager.setAdapter(viewPagerAdapter);
-
-        tabLayout.getTabAt(0).setIcon(R.drawable.tab_income);
-        tabLayout.getTabAt(1).setIcon(R.drawable.tab_expense);
+        tabLayoutMediator.attach();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
 
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+        getMenuInflater().inflate(R.menu.main_menu,menu);
         return true;
     }
 
@@ -96,43 +82,5 @@ public class NewEntryActivity extends AppCompatActivity implements IncomeFragmen
         }
 
         return super.onOptionsItemSelected(item);
-        }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-        uri.getFragment();
-    }
-
-
-    private class ViewPagerAdapter extends FragmentPagerAdapter {
-
-        private List<Fragment> fragments = new ArrayList<>();
-        private List<String> fragmentTitle = new ArrayList<>();
-
-        public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
-            super(fm, behavior);
-        }
-
-        public void addFragment(Fragment fragment, String title){
-            fragments.add(fragment);
-            fragmentTitle.add(title);
-        }
-
-        @NonNull
-        @Override
-        public Fragment getItem(int position) {
-            return fragments.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return fragments.size();
-        }
-
-        @Nullable
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return fragmentTitle.get(position);
-        }
     }
 }

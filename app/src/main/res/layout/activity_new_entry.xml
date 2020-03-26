@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,27 +7,38 @@
     tools:context=".NewEntryActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/main_appbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background">
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLatout"
+        app:liftOnScroll="true">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/new_entry_toolbar"
+            android:id="@+id/main_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/background"
-            app:navigationIcon="?attr/homeAsUpIndicator"/>
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/new_entry_tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="?attr/actionBarSize" />
 
     </com.google.android.material.appbar.AppBarLayout>
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/new_entry_view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLatout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@id/main_appbar_layout"
+        app:tabIndicatorHeight="3dp"
+        app:tabMode="fixed"
+        app:tabPaddingBottom="8dp"
+        app:tabPaddingTop="15dp" />
+
+    <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabLatout"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

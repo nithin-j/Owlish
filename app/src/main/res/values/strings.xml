@@ -21,7 +21,34 @@
     <string name="menuHelp">Help</string>
     <string name="menuLogout">Logout</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="entry_title">Title</string>
+    <string name="entry_amount">Amount</string>
+    <string name="entry_desc">Description</string>
+    <string name="btn_add">Add</string>
+    <string name="btn_reset">Reset</string>
+
+
+    <string-array name="expense_categories">
+        <item>Rent</item>
+        <item>Groceries</item>
+        <item>Electricity</item>
+        <item>Insurance</item>
+        <item>Vehicle</item>
+        <item>Internet</item>
+        <item>Cellphone</item>
+        <item>Entertainment</item>
+        <item>Travel</item>
+        <item>Personal Care</item>
+        <item>Charity</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="income_categories">
+        <item>Salary</item>
+        <item>Bonus</item>
+        <item>Pension</item>
+        <item>Gift</item>
+        <item>Other</item>
+    </string-array>
 
 </resources>
