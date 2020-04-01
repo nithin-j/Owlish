@@ -26,6 +26,7 @@
     <string name="entry_desc">Description</string>
     <string name="btn_add">Add</string>
     <string name="btn_reset">Reset</string>
+    <string name="categories">Manage Categories</string>
 
 
     <string-array name="expense_categories">
