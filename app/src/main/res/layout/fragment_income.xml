@@ -78,10 +78,9 @@
             app:layout_row="3">
 
             <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/spinner_categories"
+                android:id="@+id/spinner_income_categories"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:entries="@array/income_categories"
                 tools:layout_editor_absoluteX="1dp"
                 tools:layout_editor_absoluteY="168dp" />
 

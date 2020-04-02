@@ -16,6 +16,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 public class NewEntryActivity extends AppCompatActivity {
 
     Toolbar mtoolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +47,15 @@ public class NewEntryActivity extends AppCompatActivity {
                         tab.setText("Expense");
                         tab.setIcon(R.drawable.tab_expense);
                         break;
+                    case 2:
+                        tab.setText("Recurring");
+                        tab.setIcon(R.drawable.tab_recurring);
                 }
             }
         });
         tabLayoutMediator.attach();
+
+
     }
 
     @Override

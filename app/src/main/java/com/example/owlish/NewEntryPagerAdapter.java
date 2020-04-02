@@ -17,13 +17,15 @@ public class NewEntryPagerAdapter extends FragmentStateAdapter {
         switch (position){
             case 0:
                 return new IncomeFragment();
-            default:
+            case 1:
                 return new ExpenseFragment();
+            default:
+                return new ReccurringFragment();
         }
     }
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 3;
     }
 }
