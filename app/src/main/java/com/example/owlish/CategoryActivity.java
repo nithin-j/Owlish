@@ -126,6 +126,10 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
             case R.id.menuLogout:
                 Toast.makeText(this, "Coming soon enough", Toast.LENGTH_SHORT).show();
                 break;
+            default:
+                Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivityForResult(myIntent, 0);
+                return true;
         }
 
         return super.onOptionsItemSelected(item);

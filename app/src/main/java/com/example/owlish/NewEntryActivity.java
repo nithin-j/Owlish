@@ -1,5 +1,6 @@
 package com.example.owlish;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -71,9 +72,12 @@ public class NewEntryActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.menuAccount:
-
+                Toast.makeText(this, "Coming soon enough", Toast.LENGTH_SHORT).show();
+                break;
 
             case R.id.menuCategory:
+                startActivity(new Intent(NewEntryActivity.this, CategoryActivity.class));
+                break;
 
 
             case R.id.menuReports:
@@ -85,6 +89,10 @@ public class NewEntryActivity extends AppCompatActivity {
             case R.id.menuLogout:
                 Toast.makeText(this, "Coming soon enough", Toast.LENGTH_SHORT).show();
                 break;
+            default:
+                Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivityForResult(myIntent, 0);
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
