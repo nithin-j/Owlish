@@ -27,6 +27,7 @@
     <string name="btn_add">Add</string>
     <string name="btn_reset">Reset</string>
     <string name="categories">Manage Categories</string>
+    <string name="expense_date">Expense Date</string>
 
 
 </resources>

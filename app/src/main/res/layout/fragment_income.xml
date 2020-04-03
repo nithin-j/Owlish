@@ -24,7 +24,7 @@
             app:layout_row="0">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etEntryTitle"
+                android:id="@+id/etIncomeTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/background"/>
@@ -40,7 +40,7 @@
             app:layout_row="1">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etEntryDesc"
+                android:id="@+id/etIncomeDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top|start"
@@ -61,7 +61,7 @@
             app:layout_row="2">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etAmount"
+                android:id="@+id/etIncomeAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/background"
@@ -73,9 +73,26 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Expense Type"
+            android:hint="@string/expense_date"
             app:layout_column="0"
             app:layout_row="3">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etIncomeDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background"
+                android:inputType="date"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Expense Type"
+            app:layout_column="0"
+            app:layout_row="4">
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spinner_income_categories"
@@ -87,24 +104,24 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_add"
+            android:id="@+id/button_IncomeAdd"
             style="@style/Widget.MaterialComponents.Button"
             android:layout_width="144dp"
             android:layout_height="wrap_content"
             android:text="@string/btn_add"
             app:layout_column="0"
             app:layout_gravity="left"
-            app:layout_row="5" />
+            app:layout_row="6" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_reset"
+            android:id="@+id/button_IncomeReset"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="144dp"
             android:layout_height="wrap_content"
             android:text="@string/btn_reset"
             app:layout_column="0"
             app:layout_gravity="right"
-            app:layout_row="5" />
+            app:layout_row="6" />
 
     </androidx.gridlayout.widget.GridLayout>
 
