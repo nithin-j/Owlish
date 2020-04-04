@@ -1,16 +1,20 @@
 package com.example.owlish;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -25,7 +29,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class CategoryActivity extends AppCompatActivity implements View.OnClickListener {
+public class CategoryActivity extends AppCompatActivity implements View.OnClickListener,
+        AdapterView.OnItemLongClickListener
+        ,DialogInterface.OnClickListener {
 
     Toolbar mtoolbar;
     TextInputEditText etCategory;
@@ -34,6 +40,10 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
     ListView lvCategories;
     ArrayList<String> arrayList = new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
+
+    AlertDialog.Builder alertDialog;
+    int currentPosition;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,9 +101,15 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
         btnAddCatogory.setOnClickListener(this);
 
         lvCategories = findViewById(R.id.lvCategories);
+        lvCategories.setOnItemLongClickListener(this);
 
         categoryReference = FirebaseDatabase.getInstance().getReference("Categories");
 
+        alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("Confirm Delete");
+        alertDialog.setMessage("The selected category will be removed from the system.");
+        alertDialog.setPositiveButton("OK",this);
+        alertDialog.setNegativeButton("Cancel",this);
 
     }
 
@@ -147,17 +163,63 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
 
     private void addCategory() {
         String name = etCategory.getText().toString();
+
+        validate(name);
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         String id = database.getReference("Categories").push().getKey();
 
         Categories categories = new Categories(id, name);
 
         //Toast.makeText(this, name +" "+id, Toast.LENGTH_SHORT).show();
-        categoryReference.child(String.valueOf(id)).setValue(categories);
+        categoryReference.child(String.valueOf(name)).setValue(categories);
 
         etCategory.setText(null);
         arrayAdapter.notifyDataSetChanged();
 
 
+    }
+
+    private void validate(String name) {
+        if (TextUtils.isEmpty(name)){
+            Toast.makeText(getApplicationContext(), "Category is missing", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+    }
+
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+        switch (which){
+            case DialogInterface.BUTTON_POSITIVE:
+                //Toast.makeText(this, "This item will be deleted from db: " +currentPosition, Toast.LENGTH_SHORT).show();
+                deleteCategories();
+                break;
+            case DialogInterface.BUTTON_NEGATIVE:
+                break;
+
+        }
+    }
+
+    private void deleteCategories() {
+        String name = arrayList.get(currentPosition);
+
+        DatabaseReference categoryChild;
+        categoryChild = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child("Categories")
+                .child(name);
+        categoryChild.removeValue();
+
+        arrayList.remove(currentPosition);
+        arrayAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        currentPosition=position;
+        alertDialog.create().show();
+        return false;
     }
 }
