@@ -13,6 +13,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class NewEntryActivity extends AppCompatActivity {
 
@@ -71,9 +72,6 @@ public class NewEntryActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()){
-            case R.id.menuAccount:
-                Toast.makeText(this, "Coming soon enough", Toast.LENGTH_SHORT).show();
-                break;
 
             case R.id.menuCategory:
                 startActivity(new Intent(NewEntryActivity.this, CategoryActivity.class));
@@ -84,11 +82,15 @@ public class NewEntryActivity extends AppCompatActivity {
 
 
             case R.id.menuHelp:
-
-
-            case R.id.menuLogout:
                 Toast.makeText(this, "Coming soon enough", Toast.LENGTH_SHORT).show();
                 break;
+
+            case R.id.menuLogout:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(NewEntryActivity.this,LoginActivity.class));
+                finish();
+                break;
+
             default:
                 Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivityForResult(myIntent, 0);

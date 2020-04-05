@@ -12,11 +12,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Toolbar mtoolbar;
     FloatingActionButton fab_load_new_entry;
+    String uid;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +28,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         initialize();
+
+        Toast.makeText(this, "Current User: "+uid, Toast.LENGTH_SHORT).show();
+
+
     }
 
     private void initialize() {
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        uid = user.getUid();
         mtoolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(mtoolbar);
 
@@ -47,9 +58,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         
         switch (item.getItemId()){
-            case R.id.menuAccount:
-                Toast.makeText(this, "Coming soon enough", Toast.LENGTH_SHORT).show();
-                break;
 
             case R.id.menuCategory:
                 startActivity(new Intent(MainActivity.this, CategoryActivity.class));
@@ -59,11 +67,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             case R.id.menuHelp:
-
-
-            case R.id.menuLogout:
                 Toast.makeText(this, "Coming soon enough", Toast.LENGTH_SHORT).show();
                 break;
+
+            case R.id.menuLogout:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                finish();
         }
         
         return super.onOptionsItemSelected(item);

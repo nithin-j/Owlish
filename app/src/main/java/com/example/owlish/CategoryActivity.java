@@ -21,6 +21,8 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.owlish.Data.Categories;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +45,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
 
     AlertDialog.Builder alertDialog;
     int currentPosition;
+    String uid;
 
 
     @Override
@@ -91,6 +94,8 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
     private void initialize() {
         mtoolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(mtoolbar);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        uid = user.getUid();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -103,7 +108,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
         lvCategories = findViewById(R.id.lvCategories);
         lvCategories.setOnItemLongClickListener(this);
 
-        categoryReference = FirebaseDatabase.getInstance().getReference("Categories");
+        categoryReference = FirebaseDatabase.getInstance().getReference(uid).child("Categories");
 
         alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle("Confirm Delete");
@@ -125,9 +130,6 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()){
-            case R.id.menuAccount:
-                Toast.makeText(this, "Coming soon enough", Toast.LENGTH_SHORT).show();
-                break;
 
             case R.id.menuCategory:
                 startActivity(new Intent(CategoryActivity.this, CategoryActivity.class));
@@ -137,11 +139,15 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
 
 
             case R.id.menuHelp:
-
-
-            case R.id.menuLogout:
                 Toast.makeText(this, "Coming soon enough", Toast.LENGTH_SHORT).show();
                 break;
+
+            case R.id.menuLogout:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(CategoryActivity.this,LoginActivity.class));
+                finish();
+                break;
+
             default:
                 Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivityForResult(myIntent, 0);
@@ -171,8 +177,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
 
         Categories categories = new Categories(id, name);
 
-        //Toast.makeText(this, name +" "+id, Toast.LENGTH_SHORT).show();
-        categoryReference.child(String.valueOf(name)).setValue(categories);
+        categoryReference.child(name).setValue(categories);
 
         etCategory.setText(null);
         arrayAdapter.notifyDataSetChanged();
@@ -183,6 +188,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
     private void validate(String name) {
         if (TextUtils.isEmpty(name)){
             Toast.makeText(getApplicationContext(), "Category is missing", Toast.LENGTH_LONG).show();
+            etCategory.requestFocus();
             return;
         }
 
@@ -208,6 +214,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
         categoryChild = FirebaseDatabase
                 .getInstance()
                 .getReference()
+                .child(uid)
                 .child("Categories")
                 .child(name);
         categoryChild.removeValue();

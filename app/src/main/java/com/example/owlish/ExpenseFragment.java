@@ -16,6 +16,8 @@ import com.example.owlish.Data.Categories;
 import com.example.owlish.Data.Expense;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -52,8 +54,10 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_expense, container, false);
 
 
-        categoriesReference = FirebaseDatabase.getInstance().getReference("Categories");
-        expenseReference = FirebaseDatabase.getInstance().getReference("Expense");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+        categoriesReference = FirebaseDatabase.getInstance().getReference(uid).child("Categories");
+        expenseReference = FirebaseDatabase.getInstance().getReference(uid).child("Expense");
 
         arrayAdapter = new ArrayAdapter<String>(inflater.getContext(),android.R.layout.simple_spinner_item,arrayList);
 
@@ -131,7 +135,7 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
         float amount = Float.valueOf(etExpenseAmount.getText().toString());
 
         Expense expense = new Expense(id, title, desc, amount, expenseDate, type);
-        expenseReference.child(String.valueOf(id)).setValue(expense);
+        expenseReference.child(title).setValue(expense);
 
         reset();
 

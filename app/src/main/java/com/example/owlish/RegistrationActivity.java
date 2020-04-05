@@ -15,11 +15,12 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-    TextInputEditText etName, etUsername, etPassword, etConfirmPassword;
+    TextInputEditText etUsername, etPassword, etConfirmPassword;
     MaterialButton btnRegister, btnCancel, btnLoadLogin;
 
     private FirebaseAuth mAuth;
@@ -34,9 +35,23 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         initialize();
     }
 
+    @Override
+    protected void onStart() {
+        FirebaseUser currentUSer = mAuth.getCurrentUser();
+        updateUI(currentUSer);
+
+        super.onStart();
+    }
+
+    private void updateUI(FirebaseUser currentUSer) {
+        if(currentUSer !=null){
+            Intent intent = new Intent(RegistrationActivity.this,MainActivity.class);
+            startActivity(intent);
+        }
+    }
+
     private void initialize() {
 
-        etName = findViewById(R.id.etRegName);
         etUsername = findViewById(R.id.etRegUsername);
         etPassword = findViewById(R.id.etRegPassword);
         etConfirmPassword = findViewById(R.id.etRegConfPassword);
@@ -68,14 +83,13 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void register() {
-        String name, email, password, confirmPassword;
+        String email, password, confirmPassword;
 
-        name = etName.getText().toString();
         email = etUsername.getText().toString();
         password = etPassword.getText().toString();
         confirmPassword = etConfirmPassword.getText().toString();
 
-        validate(name,email);
+        validate(email);
         if (password.equals(confirmPassword)){
             mAuth.createUserWithEmailAndPassword(email,password)
                     .addOnCompleteListener(RegistrationActivity.this, new OnCompleteListener<AuthResult>() {
@@ -98,15 +112,12 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    private void validate(String name, String username) {
+    private void validate(String username) {
 
-        if (TextUtils.isEmpty(name)) {
-            Toast.makeText(getApplicationContext(), "Please enter your name...", Toast.LENGTH_LONG).show();
-            return;
-        }
 
         if (TextUtils.isEmpty(username)) {
-            Toast.makeText(getApplicationContext(), "Please enter your email id as username...", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "email id is missing.", Toast.LENGTH_LONG).show();
+            etUsername.requestFocus();
             return;
         }
     }
@@ -116,9 +127,10 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void clearScreen() {
-        etName.setText(null);
         etUsername.setText(null);
         etPassword.setText(null);
         etConfirmPassword.setText(null);
+
+        etUsername.requestFocus();
     }
 }

@@ -16,6 +16,8 @@ import com.example.owlish.Data.Categories;
 import com.example.owlish.Data.Income;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -50,8 +52,11 @@ public class IncomeFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_income, container, false);
         spinner_categories = view.findViewById(R.id.spinner_income_categories);
 
-        categoriesReference = FirebaseDatabase.getInstance().getReference("Categories");
-        incomeReference = FirebaseDatabase.getInstance().getReference("Income");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+
+        categoriesReference = FirebaseDatabase.getInstance().getReference(uid).child("Categories");
+        incomeReference = FirebaseDatabase.getInstance().getReference(uid).child("Income");
 
         arrayAdapter = new ArrayAdapter<String>(inflater.getContext(),android.R.layout.simple_spinner_item,arrayList);
 
@@ -127,7 +132,7 @@ public class IncomeFragment extends Fragment implements View.OnClickListener {
         float amount = Float.valueOf(etIncomeAmount.getText().toString());
 
         Income expense = new Income(id, title, desc, amount, expenseDate, type);
-        incomeReference.child(String.valueOf(id)).setValue(expense);
+        incomeReference.child(title).setValue(expense);
 
         reset();
     }
