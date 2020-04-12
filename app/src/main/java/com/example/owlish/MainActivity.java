@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.menuReports:
+                startActivity(new Intent(MainActivity.this, ReportsActivity.class));
+                break;
 
 
             case R.id.menuHelp:

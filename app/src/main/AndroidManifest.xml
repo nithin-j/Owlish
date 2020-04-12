@@ -11,14 +11,15 @@
         android:roundIcon="@mipmap/owlish_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoTitleBar">
-        <activity
-            android:name=".CategoryActivity"
-            android:screenOrientation="portrait">
+        <activity android:name=".ReportsActivity">
 
         </activity>
         <activity
-            android:name=".NewEntryActivity"
+            android:name=".CategoryActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".NewEntryActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".RegistrationActivity"
             android:screenOrientation="portrait">
@@ -30,11 +31,10 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

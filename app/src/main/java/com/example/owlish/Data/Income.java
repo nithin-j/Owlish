@@ -22,7 +22,7 @@ public class Income {
 
     @Override
     public String toString() {
-        return Title;
+        return Title +": "+Type+ " $" +Amount+"\nDate: " + IncomeDate + "\nDescription: " + Description;
     }
 
     public String getId() {

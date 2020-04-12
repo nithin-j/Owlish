@@ -23,7 +23,7 @@ public class Expense {
 
     @Override
     public String toString() {
-        return Title;
+        return Title +": "+Type+ " $" +Amount+"\nDate: " + ExpenseDate + "\nDescription: " + Description;
     }
 
     public String getId() {
