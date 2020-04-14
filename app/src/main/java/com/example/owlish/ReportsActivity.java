@@ -1,12 +1,10 @@
 package com.example.owlish;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -14,7 +12,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -31,8 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class ReportsActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemLongClickListener,
-        DialogInterface.OnClickListener {
+public class ReportsActivity extends AppCompatActivity implements View.OnClickListener {
 
     Toolbar mtoolbar;
     MaterialButton btnView;
@@ -43,8 +39,7 @@ public class ReportsActivity extends AppCompatActivity implements View.OnClickLi
     ArrayAdapter<String> arrayAdapter;
     Spinner spinner_report_type;
 
-    AlertDialog.Builder alertDialog;
-    int currentPosition;
+
     String uid;
 
     @Override
@@ -136,17 +131,12 @@ public class ReportsActivity extends AppCompatActivity implements View.OnClickLi
         btnView.setOnClickListener(this);
 
         lvReports = findViewById(R.id.lvReports);
-        lvReports.setOnItemLongClickListener(this);
         spinner_report_type = findViewById(R.id.spinner_report_type);
 
         incomeReference = FirebaseDatabase.getInstance().getReference(uid).child("Income");
         expenseReference = FirebaseDatabase.getInstance().getReference(uid).child("Expense");
 
-        alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setTitle("Confirm Delete");
-        alertDialog.setMessage("The Selected entry will be permanently removed from system. \nAre you sure you want to continue?");
-        alertDialog.setPositiveButton("Confirm",this);
-        alertDialog.setNegativeButton("Cancel",this);
+
 
     }
 
@@ -271,48 +261,5 @@ public class ReportsActivity extends AppCompatActivity implements View.OnClickLi
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(DialogInterface dialog, int which) {
 
-        switch (which){
-            case DialogInterface.BUTTON_POSITIVE:
-                deleteEntry();
-                break;
-            case DialogInterface.BUTTON_NEGATIVE:
-                break;
-
-        }
-        
-    }
-
-    private void deleteEntry() {
-
-        String type = spinner_report_type.getSelectedItem().toString();
-
-        switch (type.toLowerCase()){
-            case "all":
-                Toast.makeText(this, "You cannot delete an entry from this list\nplease " +
-                        "specify the type in the above dropdown.", Toast.LENGTH_SHORT).show();
-                break;
-            case "income":
-                String Iname = arrayList.get(currentPosition);
-                Toast.makeText(this, Iname, Toast.LENGTH_SHORT).show();
-                break;
-            case "expense":
-                String Ename = arrayList.get(currentPosition);
-                Toast.makeText(this, Ename, Toast.LENGTH_SHORT).show();
-                break;
-
-        }
-
-
-        //Toast.makeText(this, "Gonna delete this entry", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        currentPosition=position;
-        alertDialog.create().show();
-        return false;
-    }
 }

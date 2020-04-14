@@ -33,6 +33,7 @@
     <string name="reports">Reports</string>
     <string name="view">View</string>
     <string name="btn_view">View</string>
+    <string name="remaining">Remaining</string>
 
 
     <string-array name="reports">
