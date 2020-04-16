@@ -77,9 +77,9 @@ public class NewEntryActivity extends AppCompatActivity {
                 startActivity(new Intent(NewEntryActivity.this, CategoryActivity.class));
                 break;
 
-
             case R.id.menuReports:
-
+                startActivity(new Intent(NewEntryActivity.this, ReportsActivity.class));
+                break;
 
             case R.id.menuHelp:
                 Toast.makeText(this, "Coming soon enough", Toast.LENGTH_SHORT).show();

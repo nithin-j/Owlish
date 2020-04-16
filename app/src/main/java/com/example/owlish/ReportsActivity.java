@@ -240,7 +240,8 @@ public class ReportsActivity extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case R.id.menuReports:
-
+                startActivity(new Intent(ReportsActivity.this, ReportsActivity.class));
+                break;
 
             case R.id.menuHelp:
                 Toast.makeText(this, "Coming soon enough", Toast.LENGTH_SHORT).show();

@@ -136,6 +136,8 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.menuReports:
+                startActivity(new Intent(CategoryActivity.this, ReportsActivity.class));
+                break;
 
 
             case R.id.menuHelp:
@@ -146,8 +148,6 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(CategoryActivity.this,LoginActivity.class));
                 finish();
-                break;
-
             default:
                 Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivityForResult(myIntent, 0);

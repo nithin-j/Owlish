@@ -16,7 +16,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/background"
+            android:backgroundTint="@color/primary_dark"
             app:layout_column="0"
             app:layout_row="0"
             app:liftOnScroll="true">

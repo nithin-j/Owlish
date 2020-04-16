@@ -146,8 +146,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         pieDataSet.setValueTextSize(18);
 
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.GREEN);
-        colors.add(Color.MAGENTA);
+        colors.add(Color.parseColor("#049b06"));
+        colors.add(Color.parseColor("#951802"));
 
         pieDataSet.setColors(colors);
         PieData pieData = new PieData(pieDataSet);
@@ -224,13 +224,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 //        //add colors to dataset
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.GRAY);
-        colors.add(Color.BLUE);
-        colors.add(Color.RED);
-        colors.add(Color.GREEN);
-        colors.add(Color.CYAN);
-        colors.add(Color.YELLOW);
-        colors.add(Color.MAGENTA);
+        colors.add(Color.parseColor("#57065c"));
+        colors.add(Color.parseColor("#97005b"));
+        colors.add(Color.parseColor("#ca1b4a"));
+        colors.add(Color.parseColor("#ea542d"));
+        colors.add(Color.parseColor("#f48d00"));
+        colors.add(Color.parseColor("#e5c700"));
+        colors.add(Color.parseColor("#b9ff13"));
 
         pieDataSet.setColors(colors);
         PieData pieData = new PieData(pieDataSet);
@@ -257,13 +257,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 //        //add colors to dataset
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.GRAY);
-        colors.add(Color.BLUE);
-        colors.add(Color.RED);
-        colors.add(Color.GREEN);
-        colors.add(Color.CYAN);
-        colors.add(Color.YELLOW);
-        colors.add(Color.MAGENTA);
+        colors.add(Color.parseColor("#003f5c"));
+        colors.add(Color.parseColor("#374c80"));
+        colors.add(Color.parseColor("#7a5195"));
+        colors.add(Color.parseColor("#bc5090"));
+        colors.add(Color.parseColor("#ef5675"));
+        colors.add(Color.parseColor("#ff764a"));
+        colors.add(Color.parseColor("#ffa600"));
 
         pieDataSet.setColors(colors);
         PieData pieData = new PieData(pieDataSet);
